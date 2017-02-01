@@ -1,0 +1,303 @@
+def preorder(root):
+    """Returns a tree in a list of preorder form
+
+        >>> class Node(object):
+        ...     def __init__(self, value):
+        ...             self.value=value
+        ...             self.left = None
+        ...             self.right = None
+        ...     def add_node(self, obj):
+        ...             if obj.value < self.value:
+        ...                 self.left = obj
+        ...             else:
+        ...                 self.right = obj
+        ...
+        >>> one = Node(1)
+        >>> two = Node(2)
+        >>> three = Node(3)
+        >>> one.add_node(two)
+        >>> two.add_node(three)
+        >>> print preorder(one)
+        [1, 2, 3]
+
+        >>> three = Node(3)
+        >>> two = Node(2)
+        >>> one = Node(1)
+        >>> two.add_node(one)
+        >>> two.add_node(three)
+        >>> print preorder(two)
+        [2, 1, 3]
+
+        >>> three = Node(3)
+        >>> two = Node(2)
+        >>> one = Node(1)
+        >>> three.add_node(two)
+        >>> two.add_node(one)
+        >>> print preorder(three)
+        [3, 2, 1]
+
+    """
+
+    if root is None:
+        return []
+    return [root.value] + preorder(root.left) + preorder(root.right)
+
+
+def inorder(root):
+    """Returns a tree in a list of inorder form
+
+        >>> class Node(object):
+        ...     def __init__(self, value):
+        ...             self.value=value
+        ...             self.left = None
+        ...             self.right = None
+        ...     def add_node(self, obj):
+        ...             if obj.value < self.value:
+        ...                 self.left = obj
+        ...             else:
+        ...                 self.right = obj
+        ...
+        >>> one = Node(1)
+        >>> two = Node(2)
+        >>> three = Node(3)
+        >>> one.add_node(two)
+        >>> two.add_node(three)
+        >>> print inorder(one)
+        [1, 2, 3]
+
+        >>> three = Node(3)
+        >>> two = Node(2)
+        >>> one = Node(1)
+        >>> two.add_node(one)
+        >>> two.add_node(three)
+        >>> print inorder(two)
+        [1, 2, 3]
+
+        >>> three = Node(3)
+        >>> two = Node(2)
+        >>> one = Node(1)
+        >>> three.add_node(two)
+        >>> two.add_node(one)
+        >>> print inorder(three)
+        [1, 2, 3]
+
+        >>> from binarytree import bst
+        >>> my_bst = bst(height=5)
+        >>> out = inorder(my_bst)
+        >>> out == sorted(out)
+        True
+
+    """
+
+    if root is None:
+        return []
+    return inorder(root.left) + [root.value] + inorder(root.right)
+
+
+def postorder(root):
+    """Returns a tree in a list of postorder form
+
+        >>> class Node(object):
+        ...     def __init__(self, value):
+        ...             self.value=value
+        ...             self.left = None
+        ...             self.right = None
+        ...     def add_node(self, obj):
+        ...             if obj.value < self.value:
+        ...                 self.left = obj
+        ...             else:
+        ...                 self.right = obj
+        ...
+        >>> one = Node(1)
+        >>> two = Node(2)
+        >>> three = Node(3)
+        >>> one.add_node(two)
+        >>> two.add_node(three)
+        >>> print postorder(one)
+        [3, 2, 1]
+
+        >>> three = Node(3)
+        >>> two = Node(2)
+        >>> one = Node(1)
+        >>> two.add_node(one)
+        >>> two.add_node(three)
+        >>> print postorder(two)
+        [1, 3, 2]
+
+        >>> three = Node(3)
+        >>> two = Node(2)
+        >>> one = Node(1)
+        >>> three.add_node(two)
+        >>> two.add_node(one)
+        >>> print postorder(three)
+        [1, 2, 3]
+
+    """ 
+
+    if root is None:
+        return []
+    return postorder(root.left) + postorder(root.right) + [root.value] 
+    
+
+def count_nodes(root):
+    """Counts and returns the number of nodes in a tree using 
+    dfs
+
+        >>> class Node(object):
+        ...     def __init__(self, value):
+        ...             self.value=value
+        ...             self.left = None
+        ...             self.right = None
+        ...     def add_node(self, obj):
+        ...             if obj.value < self.value:
+        ...                 self.left = obj
+        ...             else:
+        ...                 self.right = obj
+        ...
+        >>> three = Node(3)
+        >>> two = Node(2)
+        >>> one = Node(1)
+        >>> three.add_node(two)
+        >>> two.add_node(one)
+        >>> print count_nodes(three)
+        3
+
+    """
+
+    if root is None:
+        return 0
+    return 1 + count_nodes(root.left) + count_nodes(root.right)  
+
+
+def BFS(root,data):
+    """Search for a node using BFS
+       >>> class Node(object):
+       ...      def __init__(self,data,children=None):
+       ...              self.data = data
+       ...              self.children = children or []
+       ...      def add_child(self, obj):
+       ...             self.children.append(obj)
+       ...
+       >>> one = Node(1)
+       >>> two = Node(2)
+       >>> three = Node(3)
+       >>> one.add_child(two)
+       >>> one.add_child(three)
+       >>> BFS(one,3)
+       True
+
+       >>> BFS(one,4)
+       False
+    """
+
+    to_visit = [root]
+
+    while to_visit:
+        current = to_visit.pop(0)
+
+        if current.data == data:
+            return True
+
+        to_visit.extend(current.children)
+
+    return False   
+
+
+def preorder_iterative(root):
+    """Iterative preorder traversal of a tree
+
+        >>> class TreeNode(object):
+        ...     def __init__(self, x):
+        ...         self.value = x
+        ...         self.left = None
+        ...         self.right = None
+        ...     def add_node(self, obj):
+        ...             if obj.value < self.value:
+        ...                 self.left = obj
+        ...             else:
+        ...                 self.right = obj
+        ...
+        >>> one = TreeNode(1)
+        >>> two = TreeNode(2)
+        >>> three = TreeNode(3)
+        >>> two.add_node(one)
+        >>> two.add_node(three)
+        >>> print preorder_iterative(two)
+        [2, 1, 3]
+    """
+
+    result = []
+
+    if root is None:
+        return result
+
+    to_visit = []
+    to_visit.append(root)
+
+    while(len(to_visit) > 0):
+        node = to_visit.pop()
+        result.append(node.value)
+        if node.right is not None:    
+            to_visit.append(node.right)
+        if node.left is not None:
+            to_visit.append(node.left)
+        
+
+    return result  
+
+
+def tree_height(root):
+    """returns the height of tree
+
+        >>> class Node(object):
+        ...     def __init__(self, value):
+        ...             self.value=value
+        ...             self.left = None
+        ...             self.right = None
+        ...     def add_node(self, obj):
+        ...             if obj.value < self.value:
+        ...                 self.left = obj
+        ...             else:
+        ...                 self.right = obj
+        ...
+        >>> three = Node(3)
+        >>> two = Node(2)
+        >>> one = Node(1)
+        >>> three.add_node(two)
+        >>> two.add_node(one)
+        >>> print tree_height(three)
+        2
+
+    """
+
+    if root is None:
+        return 0
+
+    print "Node: %d" % root.value
+    
+
+    left_height = tree_height(root.left) 
+    right_height = tree_height(root.right) 
+    ret_value = max(left_height,right_height) + 1
+
+    print "Root: %d, Left height: %d, Right height: %d,ret_value: %d" % (root.value, left_height, right_height, ret_value)
+
+    return ret_value
+
+
+            
+
+
+
+
+
+
+if __name__ == "__main__":
+    import doctest
+
+    print
+    result = doctest.testmod()
+    if not result.failed:
+        print "ALL TESTS PASSED. GOOD WORK!"
+    print
+
