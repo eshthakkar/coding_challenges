@@ -17,7 +17,7 @@ def max_heapify(A,i,n):
         max_heapify(A,largest,n)  
 
 
-#O(n) runtime to build a max heap from an unordered linear array
+#O(n) runtime to build a max heap from an unordered linear array. If array is in ascending order, it will take O(nlogn)  
 def build_max_heap(A):
     """ Build max heap from an array
 

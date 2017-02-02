@@ -266,27 +266,96 @@ def tree_height(root):
         >>> three.add_node(two)
         >>> two.add_node(one)
         >>> print tree_height(three)
-        2
+        3
 
     """
 
     if root is None:
         return 0
 
-    print "Node: %d" % root.value
+    # print "Node: %d" % root.value
     
 
     left_height = tree_height(root.left) 
     right_height = tree_height(root.right) 
     ret_value = max(left_height,right_height) + 1
 
-    print "Root: %d, Left height: %d, Right height: %d,ret_value: %d" % (root.value, left_height, right_height, ret_value)
+    # print "Root: %d, Left height: %d, Right height: %d,ret_value: %d" % (root.value, left_height, right_height, ret_value)
 
     return ret_value
 
 
             
+def is_balanced(root):
+    """ Check if the difference between the depths of any two leaf nodes is not greater than 1
 
+        >>> class Node(object):
+        ...     def __init__(self, value):
+        ...             self.value=value
+        ...             self.left = None
+        ...             self.right = None
+        ...     def add_node(self, obj):
+        ...             if obj.value < self.value:
+        ...                 self.left = obj
+        ...             else:
+        ...                 self.right = obj
+        ...
+        >>> eleven = Node(11)
+        >>> twelve = Node(12)
+        >>> nine = Node(9)
+        >>> six = Node(6)
+        >>> ten = Node(10)
+        >>> four = Node(4)
+        >>> two = Node(2)
+        >>> eleven.add_node(twelve)
+        >>> eleven.add_node(nine)
+        >>> nine.add_node(ten)
+        >>> nine.add_node(six)
+        >>> six.add_node(four)
+        >>> four.add_node(two)
+        >>> print is_balanced(eleven)
+        False
+
+        >>> eleven = Node(11)
+        >>> twelve = Node(12)
+        >>> nine = Node(9)
+        >>> six = Node(6)
+        >>> ten = Node(10)
+        >>> eleven.add_node(twelve)
+        >>> eleven.add_node(nine)
+        >>> nine.add_node(ten)
+        >>> nine.add_node(six)
+        >>> print is_balanced(eleven)
+        True
+
+
+
+    """
+
+    depths = []
+    nodes = []
+    nodes.append((root,0))
+
+    while len(nodes):
+        node,depth = nodes.pop()
+
+        # If leaf node
+        if not node.left and not node.right:
+
+            # New leaf node, not in depths
+            if depth not in depths:
+                depths.append(depth)
+
+                if len(depths) > 2 or (len(depths) == 2 and abs(depths[0] - depths[1]) > 1):
+                    return False
+
+        else:
+            if node.left:
+                nodes.append((node.left,depth + 1)) 
+            if node.right:
+                nodes.append((node.right,depth + 1)) 
+
+    return True                           
 
 
 
