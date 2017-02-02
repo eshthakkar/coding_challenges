@@ -358,7 +358,62 @@ def is_balanced(root):
     return True                           
 
 
+def is_bst_checker(root,lower_bound=-float('inf'),upper_bound=float('inf')):
+    """Check if tree is a bst
+        >>> class Node(object):
+        ...     def __init__(self, value):
+        ...             self.value=value
+        ...             self.left = None
+        ...             self.right = None
+        ...     def add_node(self, obj):
+        ...             if obj.value < self.value:
+        ...                 self.left = obj
+        ...             else:
+        ...                 self.right = obj
+        ...
+        >>> eleven = Node(11)
+        >>> twelve = Node(12)
+        >>> nine = Node(9)
+        >>> six = Node(6)
+        >>> ten = Node(10)
+        >>> four = Node(4)
+        >>> two = Node(2)
+        >>> eleven.add_node(twelve)
+        >>> eleven.add_node(nine)
+        >>> nine.add_node(ten)
+        >>> nine.add_node(six)
+        >>> six.add_node(four)
+        >>> four.add_node(two)
+        >>> print is_bst_checker(eleven)
+        True
 
+        >>> eleven = Node(11)
+        >>> twelve = Node(12)
+        >>> nine = Node(9)
+        >>> six = Node(6)
+        >>> ten = Node(10)
+        >>> four = Node(4)
+        >>> two = Node(2)
+        >>> fifteen = Node(15)
+        >>> eleven.add_node(twelve)
+        >>> eleven.add_node(nine)
+        >>> nine.add_node(ten)
+        >>> nine.add_node(six)
+        >>> six.add_node(four)
+        >>> four.add_node(fifteen)
+        >>> print is_bst_checker(eleven)
+        False
+
+
+    """
+
+    if root is None:
+        return True
+
+    if root.value > upper_bound or root.value < lower_bound:
+        return False
+
+    return is_bst_checker(root.left,lower_bound,root.value) and is_bst_checker(root.right,root.value,upper_bound)       
 
 
 if __name__ == "__main__":
