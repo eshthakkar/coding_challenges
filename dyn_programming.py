@@ -54,7 +54,57 @@ def editDist(str1, str2, m, n):
                 dp[i][j] = 1 + min(dp[i][j-1],   # Insert
                                    dp[i-1][j],   # Remove
                                    dp[i-1][j-1]) # Replace
-    return dp[m][n]                                  
+    return dp[m][n] 
+
+
+
+# Recursive solution, but has same computations over and over again due to overlapping subproblems. O(2^n) time complexity
+def rod_cutting(rod_prices,n):
+    """Returns the best obtainable price for a rod of length n and
+       price[] as prices of different pieces
+
+       >>> rod_prices = [1, 5, 8, 9, 10, 17, 17, 20]
+       >>> n = len(rod_prices)
+       >>> print rod_cutting(rod_prices,n)
+       22
+    """
+
+    # Base case for recursion to stop
+    if n <= 0:
+        return 0
+
+    max_price = 0
+
+    # Recursively cut the rod in different pieces and compare different configurations
+    for i in xrange(n):
+        max_price = max(max_price,rod_prices[i] + rod_cutting(rod_prices,n-i-1))
+
+    return max_price 
+
+
+#O(n^2) time complexity using dynamic programming instead of O(2^n)
+def rod_cut_dyn(prices,n):
+    """Returns the best obtainable price for a rod of length n and
+       price[] as prices of different pieces
+
+       >>> rod_prices = [1, 5, 8, 9, 10, 17, 17, 20]
+       >>> n = len(rod_prices)
+       >>> print rod_cut_dyn(rod_prices,n)
+       22
+    """
+
+    # A list of previously computed values
+    val = [] 
+    val.append(0)
+
+    for i in xrange(1,n+1):
+        max_val = 0
+        for j in xrange(i):
+            max_val = max(max_val, prices[j] + val[i-j-1])
+        val.append(max_val)
+    return val[n]        
+
+
                        
 
 if __name__ == "__main__":
