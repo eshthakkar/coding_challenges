@@ -104,7 +104,7 @@ def rod_cut_dyn(prices,n):
         val.append(max_val)
     return val[n] 
 
-
+#O(nW) time complexity
 def knapsack(W,val,wt,n):
     """0-1 knapsack problem
         >>> vals = [60, 100, 120]
@@ -125,8 +125,44 @@ def knapsack(W,val,wt,n):
                 k[i][w] = k[i-1][w]
     return k[n][W]                
                            
+def print_coins(coinsUsed,change):
+    """Get the coins used to get the change amount"""
+    coin = change
 
-                       
+    while coin > 0:
+        thisCoin = coinsUsed[coin]
+        print thisCoin
+        coin -= thisCoin
+
+# O(mn) time complexity
+def change_making(coinValueList,change,minCoins,coinsUsed):
+    """Rendering change using the fewest coins
+        >>> clist = [1,5,10,21,25]
+        >>> amt = 63
+        >>> minCoins = [0]*(amt + 1)
+        >>> coinsUsed = [0]*(amt + 1)
+        >>> print change_making(clist,amt,minCoins,coinsUsed)
+        21
+        21
+        21
+        3
+
+    """
+
+    for cents in xrange(change+1):
+        coinCount = cents
+        newCoin = 1
+
+        for j in [c for c in coinValueList if c <= cents]:
+            if (minCoins[cents - j]) + 1 < coinCount:
+                coinCount = (minCoins[cents - j]) + 1
+                newCoin = j
+        minCoins[cents] = coinCount
+        coinsUsed[cents] = newCoin
+
+    print_coins(coinsUsed,change)    
+    return minCoins[change]            
+
 
 if __name__ == "__main__":
     import doctest
