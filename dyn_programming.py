@@ -102,8 +102,29 @@ def rod_cut_dyn(prices,n):
         for j in xrange(i):
             max_val = max(max_val, prices[j] + val[i-j-1])
         val.append(max_val)
-    return val[n]        
+    return val[n] 
 
+
+def knapsack(W,val,wt,n):
+    """0-1 knapsack problem
+        >>> vals = [60, 100, 120]
+        >>> wts = [10, 20, 30]
+        >>> print knapsack(50,vals,wts,3)
+        220
+    """
+
+    k = [[0 for x in range(W+1)] for x in range(n+1)]
+
+    for i in range(n+1):
+        for w in range(W+1):
+            if i == 0 or w == 0:
+                k[i][w] = 0
+            elif wt[i-1] <= w:
+                k[i][w] = max(val[i-1] + k[i-1][w - wt[i-1]], k[i-1][w])
+            else:
+                k[i][w] = k[i-1][w]
+    return k[n][W]                
+                           
 
                        
 
