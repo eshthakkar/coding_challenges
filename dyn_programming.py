@@ -161,8 +161,44 @@ def change_making(coinValueList,change,minCoins,coinsUsed):
         coinsUsed[cents] = newCoin
 
     print_coins(coinsUsed,change)    
-    return minCoins[change]            
+    return minCoins[change]  
 
+
+#O(n) time complexity
+def climb_stairs(n,arr=None):
+    """
+        Davis has  staircases in his house and he likes to climb each staircase ,1 ,2 or 3  steps at a time. 
+        Being a very precocious child, he wonders how many ways there are to reach the top of the staircase.
+        >>> print climb_stairs(4)
+        7
+        >>> print climb_stairs(7)
+        44
+    """
+    if arr is None:
+        arr = {}
+    ways = 0
+    
+        
+    if n == 1:
+        return 1
+    
+    elif n == 2:
+        return 2
+    
+    elif n == 3:
+        return 4
+    
+    elif n in arr:
+        return arr[n]
+    
+    for i in xrange(1,4):
+        ways += climb_stairs(n-i,arr)
+        
+    arr[n] = ways
+    return ways
+    
+
+    
 
 if __name__ == "__main__":
     import doctest
