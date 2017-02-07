@@ -104,6 +104,7 @@ def rod_cut_dyn(prices,n):
         val.append(max_val)
     return val[n] 
 
+
 #O(nW) time complexity
 def knapsack(W,val,wt,n):
     """0-1 knapsack problem
@@ -124,7 +125,8 @@ def knapsack(W,val,wt,n):
             else:
                 k[i][w] = k[i-1][w]
     return k[n][W]                
-                           
+ 
+
 def print_coins(coinsUsed,change):
     """Get the coins used to get the change amount"""
     coin = change
@@ -133,6 +135,7 @@ def print_coins(coinsUsed,change):
         thisCoin = coinsUsed[coin]
         print thisCoin
         coin -= thisCoin
+
 
 # O(mn) time complexity
 def change_making(coinValueList,change,minCoins,coinsUsed):
@@ -164,7 +167,7 @@ def change_making(coinValueList,change,minCoins,coinsUsed):
     return minCoins[change]  
 
 
-#O(n) time complexity
+#O(n) time complexity, uses memoization
 def climb_stairs(n,arr=None):
     """
         Davis has  staircases in his house and he likes to climb each staircase ,1 ,2 or 3  steps at a time. 
