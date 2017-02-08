@@ -1,6 +1,6 @@
 def find4uniques(a,b):
     """ Check if the indices of all 4 numbers are unique and return the list of indices if they are."""
-    
+
     i = 0
     if a[i] == b[i] or a[i] == b[i+1] or a[i+1] == b[i] or a[i+1] == b[i+1]:
         return None
@@ -51,6 +51,51 @@ def quad_combinator(arr,s):
             if combination is not None:
                 return combination
     return None            
+
+#O(n) runtime
+def HasPairWithSum(nums,target):
+    """ Find if a pair of numbers exist in the sorted list with a sum that is equal to target
+        >>> print HasPairWithSum([1,2,4,5],8)
+        False
+
+        >>> print HasPairWithSum([1,2,4,4],8)
+        True
+    """
+    i = 0
+    j = len(nums) - 1
+
+    while i < j:
+        calc_sum = nums[i] + nums[j]
+
+        if calc_sum == target:
+            return True
+        elif calc_sum < target:
+            i += 1
+        else:
+            j -= 1
+
+    return False
+
+#O(n) runtime
+def HasPairWithSum_unsorted(nums,target):
+    """ Return True if a pair of numbers from unsorted list add up to target otherwise return False
+        >>> print HasPairWithSum_unsorted([1,2,4,5],8)
+        False
+
+        >>> print HasPairWithSum_unsorted([1,2,4,4],8)
+        True
+    """ 
+
+    comp = set()
+
+    for num in nums:
+        val = target - num
+        if val in comp:
+            return True
+        else:
+            comp.add(val) 
+
+    return False              
 
 
 if __name__ == "__main__":
