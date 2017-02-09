@@ -19,7 +19,7 @@ def str_to_num(string_num):
         raise TypeError("String to be converted is invalid")
 
     for char in reversed(string_num):
-        val += (ord(char) - 48) * (10 ** i)
+        val += (ord(char) - ord('0')) * (10 ** i)
         i += 1
 
     return val 
