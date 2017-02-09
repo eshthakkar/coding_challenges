@@ -11,16 +11,21 @@ def str_to_num(string_num):
     """
 
     val = 0
-    i = 0
+    
     if string_num is None or string_num == "":
         raise TypeError("String to be converted is empty or Null")
 
     if not string_num.isdigit():
         raise TypeError("String to be converted is invalid")
 
-    for char in reversed(string_num):
-        val += (ord(char) - ord('0')) * (10 ** i)
-        i += 1
+    # for char in reversed(string_num):
+    #     val += (ord(char) - ord('0')) * (10 ** i)
+    #     i += 1
+
+    # Alternatively
+
+    for char in string_num:
+        val = val * 10 + (ord(char) - ord("0"))
 
     return val 
 
