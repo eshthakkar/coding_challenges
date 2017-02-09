@@ -3,18 +3,20 @@ def str_to_num(string_num):
         >>> print str_to_num("123")
         123
 
-        >>> print str_to_num("-123")
-        -1
+        # >>> print str_to_num("-123")
+        # TypeError:String to be converted is invalid
 
-        >>> print str_to_num("abc")
-        -1
+        # >>> print str_to_num("abc")
+        # TypeError:String to be converted is invalid
     """
 
     val = 0
     i = 0
+    if string_num is None or string_num == "":
+        raise TypeError("String to be converted is empty or Null")
 
     if not string_num.isdigit():
-        return -1
+        raise TypeError("String to be converted is invalid")
 
     for char in reversed(string_num):
         val += (ord(char) - 48) * (10 ** i)
