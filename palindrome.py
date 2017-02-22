@@ -1,4 +1,5 @@
 
+#O(n) time complexity and constant O(1) space complexity as the ascii set is constant so set will have only finite unique characters
 def has_palindrome_permutation(given_string):
     """ Write an efficient function that checks whether any permutation of an input string is a palindrome
         >>> print has_palindrome_permutation("civic")
