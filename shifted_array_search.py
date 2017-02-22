@@ -73,6 +73,20 @@ def shiftedArraySearch(shiftArr,num):
     
 
 
+def remove_duplicates(nums):
+    """ Remove duplicates from sorted array such that at the most 2 duplicates are allowed and return new length of array
+        >>> remove_duplicates([1, 1, 1, 2, 3])
+        4
+
+    """
+
+    i = 0
+    for n in nums:
+        if i < 2 or n > nums[i-2]:
+            nums[i] = n
+            i += 1
+    return i        
+
 
 if __name__ == "__main__":
     import doctest
