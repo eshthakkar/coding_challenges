@@ -416,6 +416,46 @@ def is_bst_checker(root,lower_bound=-float('inf'),upper_bound=float('inf')):
     return is_bst_checker(root.left,lower_bound,root.value) and is_bst_checker(root.right,root.value,upper_bound)       
 
 
+def largest_values(root):
+    """
+        >>> class TreeNode(object):
+        ...     def __init__(self, x):
+        ...         self.val = x
+        ...         self.left = None
+        ...         self.right = None
+        ...     def add_left(self, obj):
+        ...         self.left = obj
+        ...     def add_right(self,obj):
+        ...         self.right = obj
+        ...
+        >>> one = TreeNode(1)
+        >>> three = TreeNode(3)
+        >>> two = TreeNode(2)
+        >>> five = TreeNode(5)
+        >>> nine = TreeNode(9)
+        >>> thr = TreeNode(3)
+        >>> one.add_left(three)
+        >>> one.add_right(two)
+        >>> three.add_left(five)
+        >>> three.add_right(thr)
+        >>> two.add_right(nine)
+        >>> print largest_values(one)
+        [1, 3, 9]
+    """
+    if not root: return []
+    queue, ans = [(0,root)], {}
+    while queue:
+        level, node = queue.pop(0)
+        if level not in ans or node.val > ans[level]:
+            ans[level] = node.val
+        if node.right:
+            queue += (level+1, node.right),
+        if node.left:
+            queue += (level+1, node.left),
+        
+    return [ans[i] for i in range(level+1)]
+ 
+
 if __name__ == "__main__":
     import doctest
 
