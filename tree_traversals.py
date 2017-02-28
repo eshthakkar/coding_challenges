@@ -449,13 +449,62 @@ def largest_values(root):
         if level not in ans or node.val > ans[level]:
             ans[level] = node.val
         if node.right:
-            queue += (level+1, node.right),
+            queue.append((level+1, node.right))
         if node.left:
-            queue += (level+1, node.left),
+            queue.append((level+1, node.left))
+
         
     return [ans[i] for i in range(level+1)]
  
+ 
+class Node(object):
+    def __init__(self,value):
+        self.value = value
+        self.left = None
+        self.right = None
 
+
+    def add_node(self, obj):
+        if obj.value < self.value:
+            self.left = obj
+        else:
+            self.right = obj
+
+
+def add_node_bst(root,key):
+    """Add a node to a BST
+        >>> eleven = Node(11)
+        >>> twelve = Node(12)
+        >>> nine = Node(9)
+        >>> six = Node(6)
+        >>> ten = Node(10)
+        >>> four = Node(4)
+        >>> two = Node(2)
+        >>> eleven.add_node(twelve)
+        >>> eleven.add_node(nine)
+        >>> nine.add_node(ten)
+        >>> nine.add_node(six)
+        >>> six.add_node(four)
+        >>> four.add_node(two)
+        >>> three = add_node_bst(eleven,3)
+        >>> print preorder(eleven)
+        [11, 9, 6, 4, 2, 3, 10, 12]
+
+    """
+
+    if root is None:
+        return Node(key)
+
+    if key < root.value:
+        root.left = add_node_bst(root.left,key)
+    elif key > root.value:
+        root.right = add_node_bst(root.right,key)
+
+    return root            
+
+    
+            
+            
 if __name__ == "__main__":
     import doctest
 
