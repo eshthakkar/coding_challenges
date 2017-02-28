@@ -23,6 +23,49 @@ def activity_selector(activity):
     return max_array
 
 
+#O(nlogn) time complexity and O(n) space complexity
+def merge_ranges(meetings):
+    """ Write a function that takes a list of meeting time ranges and returns a list of condensed ranges.
+        >>> meetings = [(1,10), (7,9), (3,5), (2,6)]
+        >>> print merge_ranges(meetings)
+        [(1, 10)]
+
+        >>> meetings = [(1, 2), (2, 3)]
+        >>> print merge_ranges(meetings)
+        [(1, 3)]
+
+        >>> meetings = [(1, 5), (2, 3)]
+        >>> print merge_ranges(meetings)
+        [(1, 5)]
+
+        >>> meetings = [(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)]
+        >>> print merge_ranges(meetings)
+        [(0, 1), (3, 8), (9, 12)]
+    """
+
+    # sort the meetings by start time
+    meetings.sort(key=lambda tup: tup[0])
+
+    merged_meetings = [meetings[0]]
+
+    for current_meeting_start, current_meeting_end in meetings[1:]:
+
+        last_merged_meeting_start, last_merged_meeting_end = merged_meetings[-1]
+
+        if current_meeting_start <= last_merged_meeting_end:
+            merged_meetings[-1] = (last_merged_meeting_start, max(current_meeting_end,last_merged_meeting_end))
+
+        else:
+            merged_meetings.append((current_meeting_start,current_meeting_end)) 
+
+    return merged_meetings           
+
+
+            
+
+
+
+
 
 if __name__ == "__main__":
     import doctest
