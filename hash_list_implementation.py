@@ -19,6 +19,7 @@ class HashTable(object):
         return (oldhash + 1) % size  
 
 
+    # Doesn't handle the case when we try to add to a hash that is already full    
     def put(self, key, data):
         """ Add a key-data pair into the hash table"""
 
@@ -50,26 +51,36 @@ class HashTable(object):
     def get(self,key):
         """ Get the value corresponding to a key from the hash table"""
 
-        found = False
-        stop = False
-        data = None
+        position = self.hashfunction(key, len(self.slots))
 
-        start_position = self.hashfunction(key, len(self.slots))
-        position = start_position
-
-        while self.slots[position] != None and not found and not stop:
-
-            # key is found at the start hash value
-            if self.slots[position] == key:
-                found = True
-                data = self.data[position] 
-
+        for i in xrange(len(self.slots)-1): 
+            if self.slots[position] == key: 
+                return self.data[position]
             else:
                 position = self.rehash(position,len(self.slots))
-                if position == start_position:
-                    stop = True 
 
-        return data   
+        return None
+
+        # found = False
+        # stop = False
+        # data = None
+
+        # position = start_position
+
+
+        # while self.slots[position] != None and not found and not stop:
+
+        #     # key is found at the start hash value
+        #     if self.slots[position] == key:
+        #         found = True
+        #         data = self.data[position] 
+
+        #     else:
+        #         position = self.rehash(position,len(self.slots))
+        #         if position == start_position:
+        #             stop = True 
+
+        # return data   
 
 
     def __getitem__(self,key):
