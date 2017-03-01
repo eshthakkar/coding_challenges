@@ -456,7 +456,7 @@ def largest_values(root):
         
     return [ans[i] for i in range(level+1)]
  
- 
+
 class Node(object):
     def __init__(self,value):
         self.value = value
@@ -473,6 +473,7 @@ class Node(object):
 
 def add_node_bst(root,key):
     """Add a node to a BST
+    
         >>> eleven = Node(11)
         >>> twelve = Node(12)
         >>> nine = Node(9)
@@ -502,8 +503,72 @@ def add_node_bst(root,key):
 
     return root            
 
-    
-            
+
+def getmin(root):
+    """ find the lowest value in the given bst starting from the root"""
+    min_val = root.value
+
+    while root.left != None:
+        root = root.left
+        min_val = root.value  
+
+    return min_val     
+
+ 
+def delete_node_bst(root,key):
+    """ Delete the node whose value is same as key from a bst
+
+        >>> eleven = Node(11)
+        >>> twelve = Node(12)
+        >>> nine = Node(9)
+        >>> six = Node(6)
+        >>> ten = Node(10)
+        >>> four = Node(4)
+        >>> two = Node(2)
+        >>> eleven.add_node(twelve)
+        >>> eleven.add_node(nine)
+        >>> nine.add_node(ten)
+        >>> nine.add_node(six)
+        >>> six.add_node(four)
+        >>> four.add_node(two)
+        >>> print preorder(eleven)
+        [11, 9, 6, 4, 2, 10, 12]
+
+        >>> print preorder(delete_node_bst(eleven,9))
+        [11, 10, 6, 4, 2, 12]
+
+        >>> print preorder(delete_node_bst(eleven,11))
+        [12, 10, 6, 4, 2]
+
+    """
+
+    if root is None:
+        return root
+
+    if key < root.value:
+        root.left = delete_node_bst(root.left,key)
+    elif key > root.value:
+        root.right = delete_node_bst(root.right,key)
+
+    # when node to be removed is found    
+    else:
+
+        # node to be removed has only right child
+        if root.left is None:
+            return root.right
+
+        # node to be removed has only left child    
+        elif root.right is None:
+            return root.left
+
+        # node to be removed has both left and right children    
+        else:
+            root.value = getmin(root.right)
+            root.right = delete_node_bst(root.right,root.value)
+
+    return root        
+
+
             
 if __name__ == "__main__":
     import doctest
