@@ -34,6 +34,36 @@ def remove_duplicates(nums):
     return count + 1 
 
 
+def find_sale_prices(sorted_prices):
+    """ For instance, if the regular prices were 20, 80, and 100, the sale prices would be 
+        15, 60, and 75,(which is 25 percent discount on regular price) and the printer's stack would consist of the labels 15, 20, 60, 75, 80, and 100.
+        Return the sale prices from the printer's stack
+
+        >>> nums = [15, 20, 60, 75, 80, 100]
+        >>> print find_sale_prices(nums)
+        [15, 60, 75]
+
+        >>> nums = [9, 9, 12, 12, 12, 15, 16, 20]
+        >>> print find_sale_prices(nums)
+        [9, 9, 12, 15]
+
+    """
+
+    sale_prices = {}
+    result = []
+
+    for p in sorted_prices:
+        sp = int(p * 0.75)
+        if sp not in sale_prices:
+            sale_prices[sp] = p
+            
+    for price in sorted_prices:
+        if price in sale_prices:
+            sorted_prices.remove(sale_prices[price])
+            result.append(price)
+    return result                
+
+
 if __name__ == "__main__":
     import doctest
 
