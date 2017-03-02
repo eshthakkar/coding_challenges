@@ -66,7 +66,7 @@ def find_sale_prices(sorted_prices):
 
 def group_anagrams(strs):
     """ Given an array of strings, group anagrams together.
-    
+
         >>> words = ["eat", "tea", "tan", "ate", "nat", "bat"]
         >>> print sorted(group_anagrams(words))
         [['ate', 'eat', 'tea'], ['bat'], ['nat', 'tan']]
@@ -79,6 +79,39 @@ def group_anagrams(strs):
 
     return anagram_dict.values()
 
+
+# Time Complexity is O(n)
+def sort_012(nums):
+    """ 3 way partitioning problem, variation of famous Dutch national flag problem.
+    Given an array A[] consisting 0s, 1s and 2s, write a function that sorts A[]. The functions should put all 0s first, then all 1s and all 2s in last.
+
+    >>> nums = [0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1]
+    >>> print sort_012(nums)
+    [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2]
+
+    """
+
+    low = 0
+    mid = 0
+    high = len(nums) - 1
+
+    while (mid <= high):
+        if nums[mid] == 0:
+            if nums[low] != nums[mid]:
+                nums[low], nums[mid] = nums[mid], nums[low]
+            low += 1
+            mid += 1
+
+        elif nums[mid] == 1:
+            mid += 1
+
+        else:
+            if nums[high] != nums[mid]:
+                nums[high], nums[mid] = nums[mid], nums[high]
+            high -= 1
+
+    return nums        
+                
 
 if __name__ == "__main__":
     import doctest
