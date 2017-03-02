@@ -33,7 +33,7 @@ def remove_duplicates(nums):
             
     return count + 1 
 
-
+# O(n^2) runtime and O(n) space complexity
 def find_sale_prices(sorted_prices):
     """ For instance, if the regular prices were 20, 80, and 100, the sale prices would be 
         15, 60, and 75,(which is 25 percent discount on regular price) and the printer's stack would consist of the labels 15, 20, 60, 75, 80, and 100.
@@ -62,6 +62,22 @@ def find_sale_prices(sorted_prices):
             sorted_prices.remove(sale_prices[price])
             result.append(price)
     return result                
+
+
+def group_anagrams(strs):
+    """ Given an array of strings, group anagrams together.
+    
+        >>> words = ["eat", "tea", "tan", "ate", "nat", "bat"]
+        >>> print sorted(group_anagrams(words))
+        [['ate', 'eat', 'tea'], ['bat'], ['nat', 'tan']]
+    """
+
+    anagram_dict = {}
+    for item in sorted(strs):
+        sorted_item = ''.join(sorted(item))
+        anagram_dict[sorted_item] = anagram_dict.get(sorted_item,[]) + [item]
+
+    return anagram_dict.values()
 
 
 if __name__ == "__main__":
