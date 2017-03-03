@@ -113,6 +113,21 @@ def sort_012(nums):
     return nums        
                 
 
+def reverse_words(s):
+    """ Reverse the words in a sentence without reversing the characters in a word
+        >>> s = "the sky is blue"
+        >>> print reverse_words(s)
+        blue is sky the
+
+        >>> s = "a"
+        >>> print reverse_words(s)
+        a
+
+    """
+
+    return ' '.join(s.split()[::-1])   
+
+
 if __name__ == "__main__":
     import doctest
 
