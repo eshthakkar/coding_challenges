@@ -55,6 +55,10 @@ def my_function(runtime,movie_lengths):
 
 # O(n) runtime and spacetime due to the set
 def solution2(runtime,movie_lengths):
+    """
+        >>> print solution2(5,[2,4,6,1]) 
+        True
+    """
     movie_lengths_seen = set()
 
     for first_movie in movie_lengths:
@@ -64,8 +68,26 @@ def solution2(runtime,movie_lengths):
         movie_lengths_seen.add(first_movie)
     return False            
 
-print solution2(5,[2,4,6,1]) 
 
+
+
+# O(n) time complexity and O(1) space complexity
+def find_unique_delivery_id(delivery_ids):
+    """ Given the list of IDs, which contains many duplicate integers and one unique integer, 
+    find the unique integer.
+
+        >>> delivery_ids = [2,5,6,3,3,2,6]
+        >>> print find_unique_delivery_id(delivery_ids)
+        5
+    """
+
+    unique_id = 0
+
+    for delivery_id in delivery_ids:
+        unique_id ^= delivery_id
+
+    return unique_id
+    
 
 if __name__ == "__main__":
     import doctest
