@@ -125,7 +125,67 @@ def reverse_words(s):
 
     """
 
-    return ' '.join(s.split()[::-1])   
+    return ' '.join(s.split()[::-1]) 
+
+
+def find_all_concatenated_words(words):
+    """ Given a list of words (without duplicates), please write a program that returns all concatenated words in the given list of words."""
+
+    words_set = set(words)
+    ans = []
+
+    def helper(w, curr, cnt):
+        if curr == len(w):
+            if cnt > 1:
+                return True
+            else:
+                return False
+
+        for i in xrange(curr + 1, len(w) + 1):
+            if w[curr:i] in words_set and helper(w, i, cnt + 1):
+                return True
+
+        return False
+
+    for w in words:
+        if helper(w, 0, 0):
+            ans.append(w)
+
+    return ans  
+
+
+words = ["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat"]
+print find_all_concatenated_words(words)                                  
+
+
+def find_concatenate_words(A):
+    S = set(A)
+    ans = []
+    for word in A:
+        print "word: ", word
+        if not word: continue
+        stack = [0]
+        seen = {0}
+        M = len(word)
+        while stack:
+            print "stack: ", stack
+            print "seen: ", seen
+            node = stack.pop()
+            if node == M:
+                ans.append(word)
+                break
+            for j in xrange(M - node + 1):
+                if (word[node:node+j] in S and 
+                    node + j not in seen and
+                    (node > 0 or node + j != M)):
+                    stack.append(node + j)
+                    seen.add(node + j)
+
+
+    return ans
+
+
+print find_concatenate_words(words) 
 
 
 if __name__ == "__main__":

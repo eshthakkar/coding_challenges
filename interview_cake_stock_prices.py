@@ -89,6 +89,51 @@ def find_unique_delivery_id(delivery_ids):
     return unique_id
     
 
+# O(n) runtime and O(1) space complexity
+def max_product_of_3(nums):
+    """ Given a list of integers, find the highest product you can get from three of the integers.
+
+        >>> nums = [1, 10, -5, 1, -100]
+        >>> print max_product_of_3(nums)
+        5000
+    """
+
+    if len(nums) < 3:
+        raise Exception("Less than 3 items!")
+
+
+    highest = max(nums[0], nums[1])
+    lowest = min(nums[0], nums[1])
+
+    highest_product_of_2 = nums[0] * nums[1]
+    lowest_product_of_2 = nums[0] * nums[1]
+
+    highest_product_of_3 = nums[0] * nums[1] * nums[2]
+
+    for current in nums[2:]:
+
+        # Debugging
+        # print "highest_product_of_3: ", highest_product_of_3
+        # print "highest_product_of_2: ", highest_product_of_2
+        # print "lowest_product_of_2: ", lowest_product_of_2
+        # print "highest: ", highest
+        # print "lowest: ", lowest
+
+
+        highest_product_of_3 = max(highest_product_of_3, current * highest_product_of_2, current * lowest_product_of_2) 
+
+        highest_product_of_2 = max(highest_product_of_2, current * highest, current * lowest)
+
+        lowest_product_of_2 = min(lowest_product_of_2, current * highest, current * lowest)
+
+        highest = max(highest, current)
+
+        lowest = min(lowest, current)
+
+    return highest_product_of_3    
+
+
+
 if __name__ == "__main__":
     import doctest
 
