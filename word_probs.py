@@ -67,6 +67,10 @@ def is_word_possible(vocab, target_word, start, seen=None):
     return False        
 
 
+
+
+
+
 if __name__ == "__main__":
     import doctest
 
