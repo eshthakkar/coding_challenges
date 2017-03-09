@@ -285,7 +285,8 @@ def tree_height(root):
     return ret_value
 
 
-            
+
+# O(n) time and O(n) space complexity            
 def is_balanced(root):
     """ Check if the difference between the depths of any two leaf nodes is not greater than 1
 
@@ -331,6 +332,9 @@ def is_balanced(root):
 
 
     """
+
+    if root is None:
+        return True
 
     depths = []
     nodes = []
@@ -473,7 +477,7 @@ class Node(object):
 
 def add_node_bst(root,key):
     """Add a node to a BST
-    
+
         >>> eleven = Node(11)
         >>> twelve = Node(12)
         >>> nine = Node(9)
@@ -569,7 +573,127 @@ def delete_node_bst(root,key):
     return root        
 
 
-            
+def largest(root):
+    """ Return the largest element from a BST"""
+
+    if root is None:
+        raise Exception("Tree must have atleast 1 node!")
+
+    if root.right:
+        return largest(root.right)
+
+    return root.value        
+
+
+# O(h) time and space complexity where h is the height of the tree
+def largest_2nd(root):
+    """ Return the 2nd largest element from a bst
+        >>> eleven = Node(11)
+        >>> twelve = Node(12)
+        >>> nine = Node(9)
+        >>> six = Node(6)
+        >>> ten = Node(10)
+        >>> four = Node(4)
+        >>> two = Node(2)
+        >>> eleven.add_node(twelve)
+        >>> eleven.add_node(nine)
+        >>> nine.add_node(ten)
+        >>> nine.add_node(six)
+        >>> six.add_node(four)
+        >>> four.add_node(two)
+        >>> print largest_2nd(eleven)
+        11
+
+        >>> five = Node(5)
+        >>> three = Node(3)
+        >>> eight = Node(8)
+        >>> two = Node(2)
+        >>> four = Node(4)
+        >>> six = Node(6)
+        >>> ten = Node(10)
+        >>> seven = Node(7)
+        >>> fifteen = Node(15)
+        >>> five.add_node(three)
+        >>> five.add_node(eight)
+        >>> three.add_node(two)
+        >>> three.add_node(four)
+        >>> eight.add_node(six)
+        >>> eight.add_node(ten)
+        >>> six.add_node(seven)
+        >>> ten.add_node(fifteen)
+        >>> print largest_2nd(five)
+        10
+
+       
+    """
+
+
+    if not root or (not root.left and not root.right) :
+        raise Exception("There should be atleast 2 nodes in the tree")
+
+    # if we are at the largest and it has only left subtree,
+    # 2nd largest is the largest from this subtree    
+    if not root.right and root.left:
+        return largest(root.left)
+
+    # if we are at the parent of the largest, and largest has no left subtree,
+    # in that case current node is the 2nd largest    
+    if root.right and not root.right.left and not root.right.right:
+        return root.value 
+
+    # otherwise step right    
+    return largest_2nd(root.right)     
+ 
+
+
+def largest_second(root, count=0, value=None):
+    """
+        Reverse inorder traversal along with the use of a count
+
+        >>> eleven = Node(11)
+        >>> twelve = Node(12)
+        >>> nine = Node(9)
+        >>> six = Node(6)
+        >>> ten = Node(10)
+        >>> four = Node(4)
+        >>> two = Node(2)
+        >>> eleven.add_node(twelve)
+        >>> eleven.add_node(nine)
+        >>> nine.add_node(ten)
+        >>> nine.add_node(six)
+        >>> six.add_node(four)
+        >>> four.add_node(two)
+        >>> print largest_second(eleven)[1] == largest_2nd(eleven)
+        True
+
+        >>> one = Node(110)
+        >>> two = Node(65)
+        >>> three = Node(95)
+        >>> one.add_node(two)
+        >>> two.add_node(three)
+        >>> print largest_second(one)[1] == largest_2nd(one)
+        True
+
+
+
+    """
+
+    if root.right:
+        count, value = largest_second(root.right, count, value)
+
+    count += 1
+    
+    if count == 2:
+        return  count, root.value
+
+    if root.left:
+        count, value = largest_second(root.left, count, value)
+
+    return count, value    
+
+    
+
+        
 if __name__ == "__main__":
     import doctest
 
