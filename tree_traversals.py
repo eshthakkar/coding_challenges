@@ -663,7 +663,7 @@ def largest_second(root, count=0, value=None):
         >>> nine.add_node(six)
         >>> six.add_node(four)
         >>> four.add_node(two)
-        >>> print largest_second(eleven)[1] == largest_2nd(eleven)
+        >>> print largest_second(eleven)[1] == largest_2nd(eleven) == largest_2nd_iterative(eleven)
         True
 
         >>> one = Node(110)
@@ -671,7 +671,7 @@ def largest_second(root, count=0, value=None):
         >>> three = Node(95)
         >>> one.add_node(two)
         >>> two.add_node(three)
-        >>> print largest_second(one)[1] == largest_2nd(one)
+        >>> print largest_second(one)[1] == largest_2nd(one) == largest_2nd_iterative(one)
         True
 
 
@@ -691,7 +691,35 @@ def largest_second(root, count=0, value=None):
 
     return count, value    
 
-    
+
+
+def find_largest_iterative(root):
+    current = root
+
+    while current:
+        if not current.right:
+            return current.value
+
+        current = current.right
+
+
+# Iterative solution doing one walk down the bst in O(h) time in O(1) space instead of O(h) space of the call stack
+def largest_2nd_iterative(root):
+
+    if not root or (not root.left and not root.right) :
+        raise Exception("There should be atleast 2 nodes in the tree")
+
+    current = root
+
+    while current:
+        if not current.right and current.left:
+            return find_largest_iterative(current.left)
+
+        if current.right and not current.right.left and not current.right.right:
+            return current.value
+
+        current = current.right        
+
 
         
 if __name__ == "__main__":
