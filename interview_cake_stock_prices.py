@@ -133,6 +133,30 @@ def max_product_of_3(nums):
     return highest_product_of_3    
 
 
+# O(n) runtime and O(1) space complexity
+def fibonacii(n):
+    """ Return the nth fibonacii number
+        >>> fibonacii(3)
+        2
+
+        >>> fibonacii(1)
+        1
+
+        >>> fibonacii(4)
+        3
+    """
+
+    if n in [0, 1]:
+        return n
+
+    prev_prev = 0
+    prev = 1
+
+    for i in xrange(2,n+1):
+        result = prev_prev + prev
+        prev_prev = prev
+        prev = result
+    return result        
 
 if __name__ == "__main__":
     import doctest
