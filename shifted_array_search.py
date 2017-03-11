@@ -1,4 +1,4 @@
-#O(logn) runtime
+#O(logn) runtime and O(1) space complexity
 def binarySearch(arr,target,begin,end):
     """ Search the target in a sorted array using binarySearch
 
