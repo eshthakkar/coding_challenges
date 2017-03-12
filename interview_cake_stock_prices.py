@@ -158,6 +158,38 @@ def fibonacii(n):
         prev = result
     return result        
 
+
+# O(n*k) time complexity and O(k) space complexity where n is the number of types of cakes, k is the capacity of the duffel bag.
+def max_duffel_bag_value(cake_tuples,weight_capacity):
+    """ Write a function max_duffel_bag_value() that takes a list of cake type tuples and a weight capacity,
+     and returns the maximum monetary value the duffel bag can hold.
+
+        >>> cake_tuples = [(7, 160), (3, 90), (2, 15)]
+        >>> capacity    = 20
+        >>> max_duffel_bag_value(cake_tuples, capacity)
+        555
+    """
+
+    max_values_at_capacities = [0] * (weight_capacity + 1)
+
+    for current_capacity in xrange(weight_capacity + 1):
+
+        max_value_at_current_capacity = 0
+
+        for cake_weight, cake_value in cake_tuples:
+
+            if cake_weight == 0 and cake_value != 0:
+                return float("inf")
+
+            if cake_weight <= current_capacity:
+                
+                max_value_at_current_capacity = max(max_value_at_current_capacity, cake_value + max_values_at_capacities[current_capacity - cake_weight])
+
+        max_values_at_capacities[current_capacity] = max_value_at_current_capacity
+
+    return max_values_at_capacities[weight_capacity]
+
+                    
 if __name__ == "__main__":
     import doctest
 
