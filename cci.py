@@ -1,7 +1,8 @@
 # O(n) time and O(n) space complexity
 def majority_element(nums):
     """ Given a positive integers array, find the majority element. If there is no majority element,
-    return -1. 
+    return -1. A majority element is an element that makes up more than half of the items in
+    an array.
 
     >>> nums = [3, 1, 7, 1, 3, 7, 3, 7, 1, 7, 7]
     >>> print majority_element(nums)

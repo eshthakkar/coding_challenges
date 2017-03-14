@@ -189,6 +189,29 @@ def max_duffel_bag_value(cake_tuples,weight_capacity):
 
     return max_values_at_capacities[weight_capacity]
 
+
+# Our m enqueue and dequeue operations put m or fewer items into the system, giving a total runtime of O(m). 
+#  total cost per item passing through the queue is O(1) rather than the cost per enqueue() and dequeue()
+class QueueTwoStacks(object):
+
+    def __init__(self):
+        self.in_stack = []
+        self.out_stack = []
+
+    def enqueue(self, item):
+        self.in_stack.append(item)
+
+    def dequeue(self):
+        if len(self.out_stack) == 0:
+            while len(self.in_stack) > 0:
+                newest_item = self.in_stack.pop()
+                self.out_stack.append(newest_item)
+
+            if len(self.out_stack) == 0:
+                raise IndexError("Can't dequeue from an empty queue")
+
+        return self.out_stack.pop()                    
+
                     
 if __name__ == "__main__":
     import doctest
