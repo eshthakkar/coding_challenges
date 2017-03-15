@@ -277,10 +277,10 @@ def contains_cycle(first_node):
     """ Write a function contains_cycle() that takes the first node in a singly-linked list
      and returns a boolean indicating whether the list contains a cycle. """
 
-     slow_runner = first_node
-     fast_runner = first_node
+    slow_runner = first_node
+    fast_runner = first_node
 
-     while fast_runner is not None and fast_runner.next is not None:
+    while fast_runner is not None and fast_runner.next is not None:
         slow_runner = slow_runner.next
         fast_runner = fast_runner.next.next
 
@@ -333,6 +333,30 @@ def kth_to_last_node(k, head):
 
     # since left is k nodes behind right, left is the kth node to the last node!    
     return left    
+
+
+def reverse_string(word):
+    """ Reverse a string in place
+        >>> print reverse_string("acbdl")
+        ldbca
+
+        >>> print reverse_string("a")
+        a
+
+    """
+
+    left_pointer = 0
+    right_pointer = len(word) - 1
+
+    str_list = list(word)
+
+    while left_pointer < right_pointer:
+        str_list[left_pointer], str_list[right_pointer] = str_list[right_pointer], str_list[left_pointer]
+
+        left_pointer += 1
+        right_pointer -= 1
+
+    return "".join(str_list)    
 
 
 
