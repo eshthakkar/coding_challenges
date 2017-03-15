@@ -335,6 +335,7 @@ def kth_to_last_node(k, head):
     return left    
 
 
+# O(n) time complexity and O(1) space complexity
 def reverse_string(word):
     """ Reverse a string in place
         >>> print reverse_string("acbdl")
@@ -359,6 +360,42 @@ def reverse_string(word):
     return "".join(str_list)    
 
 
+def reverse_characters(str_list, begin, end):
+
+    while begin < end:
+        str_list[begin], str_list[end] = str_list[end], str_list[begin]
+
+        begin += 1
+        end -= 1
+
+    return str_list   
+
+# O(n) time and O(n) space due to the msg_list
+def reverse_words_not_using_inbuilt(message):
+    """ Reverse the word order in the whole message
+
+        >>> message = 'find you will pain only go you recordings security the into if'
+        >>> print reverse_words_not_using_inbuilt(message)
+        if into the security recordings you go only pain will you find
+    """
+
+    msg_list = list(message)
+
+    reverse_characters(msg_list, 0, len(msg_list)-1)
+
+    current_word_start_index = 0
+
+    for i in xrange(len(msg_list) + 1):
+
+        #  Found end of word
+        if i == len(msg_list) or msg_list[i] == " ":
+            reverse_characters(msg_list, current_word_start_index, i - 1)
+
+            # next word's start is 1 character ahead
+            current_word_start_index = i + 1
+
+    return "".join(msg_list)        
+            
 
             
 
