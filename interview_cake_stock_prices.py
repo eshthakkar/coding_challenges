@@ -271,7 +271,23 @@ def delete_node(node_to_delete):
     else:
         raise Exception("Cannot delete last node using this method")    
 
-                    
+
+# O(n) time and O(1) space complexity
+def contains_cycle(first_node):
+    """ Write a function contains_cycle() that takes the first node in a singly-linked list
+     and returns a boolean indicating whether the list contains a cycle. """
+
+     slow_runner = first_node
+     fast_runner = first_node
+
+     while fast_runner is not None and fast_runner.next is not None:
+        slow_runner = slow_runner.next
+        fast_runner = fast_runner.next.next
+
+        if fast_runner is slow_runner:
+            return True
+
+    return False                           
 if __name__ == "__main__":
     import doctest
 
