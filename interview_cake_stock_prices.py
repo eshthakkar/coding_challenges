@@ -212,6 +212,49 @@ class QueueTwoStacks(object):
 
         return self.out_stack.pop()                    
 
+
+class Stack(object):
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        if not self.items:
+            return None
+        return self.items.pop() 
+
+    def peek(self):
+        if not self.items:
+            return None
+        return self.items[-1]  
+
+        
+# O(1) time for push(), pop(), and get_max(). O(m) additional space, where m is the number of operations performed on the stack.
+class MaxStack(object):
+    def __init__(self):
+        self.stack = Stack()
+        self.maxs_stack = Stack()
+
+
+    def push(self, item):
+        self.stack.push(item)
+        if self.maxs_stack.peek() is None or item >= self.maxs_stack.peek():
+            self.maxs_stack.push(item) 
+
+
+    def pop(self):
+        item = self.stack.pop()
+
+        if item == self.maxs_stack.peek():
+            self.maxs_stack.pop()
+
+        return item
+        
+    def get_max(self):
+        return self.maxs_stack.peek()                
+
                     
 if __name__ == "__main__":
     import doctest
