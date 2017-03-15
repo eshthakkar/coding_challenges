@@ -309,6 +309,35 @@ def reverse_in_place(head):
     return prev    
 
 
+# O(n) time and O(1) space complexity
+def kth_to_last_node(k, head):
+    """ Return the kth to the last node from the linked list"""
+
+    if k < 1:
+        raise Exception("Cannot return a node which is less than one from the last node")
+
+    left = head    
+    right = head
+
+    # Positioning the right pointer k nodes apart from the left pointer
+    for i in xrange(k-1):
+
+        if not right.next:
+            raise valueError("k is larger than the length of the linked list")
+
+        right = right.next
+
+    while right.next:
+        left = left.next
+        right = right.next
+
+    # since left is k nodes behind right, left is the kth node to the last node!    
+    return left    
+
+
+
+            
+
 if __name__ == "__main__":
     import doctest
 
