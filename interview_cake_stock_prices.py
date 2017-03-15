@@ -255,6 +255,22 @@ class MaxStack(object):
     def get_max(self):
         return self.maxs_stack.peek()                
 
+
+# Delete node from linked list without traversing. O(1) time and O(1) space complexity. Not a very good solution as
+# it has side effects like the deleted node has a new value, it is not deleted, also the next node becomes dangling and can't
+# be reached while traversing the list.
+def delete_node(node_to_delete):
+    """ Delete a node from a linked list given only a reference to the node to be deleted"""
+
+    next_node = node_to_delete.next
+
+    if next_node:
+        node_to_delete.value = next_node.value
+        node_to_delete.next = next_node.next
+
+    else:
+        raise Exception("Cannot delete last node using this method")    
+
                     
 if __name__ == "__main__":
     import doctest
