@@ -287,7 +287,28 @@ def contains_cycle(first_node):
         if fast_runner is slow_runner:
             return True
 
-    return False                           
+    return False  
+
+
+# O(n) time and O(1) space complexity
+def reverse_in_place(head):
+    """ Reverse a linked list in place"""
+
+    current = head
+    prev = None
+    next = None
+
+    while current: 
+        next = current.next
+
+        current.next = prev
+
+        prev = current
+        current = next
+
+    return prev    
+
+
 if __name__ == "__main__":
     import doctest
 
