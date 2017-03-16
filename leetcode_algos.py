@@ -160,17 +160,22 @@ print find_all_concatenated_words(words)
 
 
 def find_concatenate_words(A):
+    """
+        >>> words = ["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat"]
+        >>> print find_concatenate_words(words) 
+        ['catsdogcats', 'dogcatsdog', 'ratcatdogcat']
+    """
     S = set(A)
     ans = []
     for word in A:
-        print "word: ", word
+        # print "word: ", word
         if not word: continue
         stack = [0]
         seen = {0}
         M = len(word)
         while stack:
-            print "stack: ", stack
-            print "seen: ", seen
+            # print "stack: ", stack
+            # print "seen: ", seen
             node = stack.pop()
             if node == M:
                 ans.append(word)
@@ -186,7 +191,36 @@ def find_concatenate_words(A):
     return ans
 
 
-print find_concatenate_words(words) 
+
+
+
+def rotate(arr,k):
+    """ Rotate an array by k spaces to the left if k is positive and to the right if k is negative
+        >>> arr = [5, 2, 6, 9, 8]
+        >>> print rotate(arr, 2)
+        [9, 8, 5, 2, 6]
+
+        >>> print rotate(arr, -2)
+        [6, 9, 8, 5, 2]
+
+        >>> arr = []
+        >>> print rotate(arr,3)
+        []
+
+        >>> arr = [5, 2, 6, 9, 8]
+        >>> print rotate(arr, 6)
+        [8, 5, 2, 6, 9]
+
+        >>> print rotate(arr, 0)
+        [5, 2, 6, 9, 8]
+    
+    """
+
+    if not arr or k == 0:
+        return arr
+
+    k = -k % len(arr)
+    return arr[k:] + arr[:k]
 
 
 if __name__ == "__main__":
