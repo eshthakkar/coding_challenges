@@ -193,6 +193,18 @@ def max_duffel_bag_value(cake_tuples,weight_capacity):
 # Our m enqueue and dequeue operations put m or fewer items into the system, giving a total runtime of O(m). 
 #  total cost per item passing through the queue is O(1) rather than the cost per enqueue() and dequeue()
 class QueueTwoStacks(object):
+    """ Build a queue using 2 stacks
+        >>> q = QueueTwoStacks()
+        >>> q.enqueue("Hello")
+        >>> q.enqueue("World")
+        >>> q.dequeue()
+        'Hello'
+
+        >>> q.enqueue("pyramid")
+        >>> q.dequeue()
+        'World'
+    """
+
 
     def __init__(self):
         self.in_stack = []
@@ -233,6 +245,25 @@ class Stack(object):
         
 # O(1) time for push(), pop(), and get_max(). O(m) additional space, where m is the number of operations performed on the stack.
 class MaxStack(object):
+    """ Stack that has a method to return the max value from the stack
+        >>> s = MaxStack()
+        >>> s.push(5)
+        >>> s.push(3)
+        >>> s.get_max()
+        5
+
+        >>> s.push(7)
+        >>> s.push(6)
+        >>> item = s.pop()
+        >>> s.get_max()
+        7
+        >>> item = s.pop()
+        >>> s.get_max()
+        5
+
+
+    """
+
     def __init__(self):
         self.stack = Stack()
         self.maxs_stack = Stack()
@@ -256,11 +287,78 @@ class MaxStack(object):
         return self.maxs_stack.peek()                
 
 
+class LL_node(object):
+    """ Create a linked list node"""
+
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+class LinkedList(object):
+    """ Create a linked list"""
+
+    def __init__(self):
+        self.head = None
+
+    def append(self, data):
+        """ Append node with data to the end of the list"""
+
+        new_node = LL_node(data)
+
+        if not self.head:
+            self.head = new_node
+
+        else:
+            current = self.head
+
+            while current.next:
+                current = current.next
+
+            current.next = new_node  
+
+    
+def print_list(head):
+
+    """ Print the linked list nodes"""
+
+    if not head:
+        print "List is empty!"
+
+    else:
+        current = head
+
+        while current:
+            print current.value,
+            current = current.next
+
+
 # Delete node from linked list without traversing. O(1) time and O(1) space complexity. Not a very good solution as
 # it has side effects like the deleted node has a new value, it is not deleted, also the next node becomes dangling and can't
 # be reached while traversing the list.
 def delete_node(node_to_delete):
-    """ Delete a node from a linked list given only a reference to the node to be deleted"""
+    """ Delete a node from a linked list given only a reference to the node to be deleted
+        >>> ll = LinkedList()
+        >>> ll.append(2)
+        >>> ll.append(4)
+        >>> ll.append(10)
+        >>> ll.append(5)
+        >>> print_list(ll.head)
+        2 4 10 5
+
+        >>> delete_node(ll.head)
+        >>> print_list(ll.head)
+        4 10 5
+
+        >>> delete_node(ll.head.next) 
+        >>> print_list(ll.head)
+        4 5
+
+        # Correctly raises exception as expected while trying to delete last node using this method
+        # >>> delete_node(ll.head.next)
+        # >>> print_list(ll.head)
+
+    """
 
     next_node = node_to_delete.next
 
@@ -275,7 +373,20 @@ def delete_node(node_to_delete):
 # O(n) time and O(1) space complexity
 def contains_cycle(first_node):
     """ Write a function contains_cycle() that takes the first node in a singly-linked list
-     and returns a boolean indicating whether the list contains a cycle. """
+     and returns a boolean indicating whether the list contains a cycle. 
+
+       >>> ll = LinkedList()
+       >>> ll.append(4)
+       >>> ll.append(7)
+       >>> print contains_cycle(ll.head)
+       False
+
+
+       >>> ll.head.next.next = ll.head
+       >>> print contains_cycle(ll.head)
+       True
+         
+    """
 
     slow_runner = first_node
     fast_runner = first_node
@@ -292,7 +403,19 @@ def contains_cycle(first_node):
 
 # O(n) time and O(1) space complexity
 def reverse_in_place(head):
-    """ Reverse a linked list in place"""
+    """ Reverse a linked list in place
+        >>> ll = LinkedList()
+        >>> ll.append(2)
+        >>> ll.append(3)
+        >>> ll.append(10)
+        >>> print_list(ll.head)
+        2 3 10
+
+        >>> new_head = reverse_in_place(ll.head)
+        >>> print_list(new_head)
+        10 3 2
+
+    """
 
     current = head
     prev = None
@@ -311,7 +434,32 @@ def reverse_in_place(head):
 
 # O(n) time and O(1) space complexity
 def kth_to_last_node(k, head):
-    """ Return the kth to the last node from the linked list"""
+    """ Return the kth to the last node from the linked list
+
+        >>> ll = LinkedList()
+        >>> ll.append(3)
+        >>> ll.append(10)
+        >>> ll.append(6)
+        >>> ll.append(15)
+        >>> ll.append(9)
+        >>> ll.append(13)
+        >>> ll.append(4)
+        >>> print_list(ll.head)
+        3 10 6 15 9 13 4
+        >>> kth_node = kth_to_last_node(3, ll.head)
+        >>> print kth_node.value
+        9
+
+        # correctly throws exception
+        # >>> kth_node = kth_to_last_node(0, ll.head)
+        # >>> print kth_node.value
+
+        # correctly throws exception
+        # >>> kth_node = kth_to_last_node(8, ll.head)
+        # >>> print kth_node.value
+
+
+    """
 
     if k < 1:
         raise Exception("Cannot return a node which is less than one from the last node")
@@ -323,7 +471,7 @@ def kth_to_last_node(k, head):
     for i in xrange(k-1):
 
         if not right.next:
-            raise valueError("k is larger than the length of the linked list")
+            raise Exception("k is larger than the length of the linked list")
 
         right = right.next
 
@@ -369,6 +517,7 @@ def reverse_characters(str_list, begin, end):
         end -= 1
 
     return str_list   
+
 
 # O(n) time and O(n) space due to the msg_list
 def reverse_words_not_using_inbuilt(message):
