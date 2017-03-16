@@ -76,11 +76,14 @@ def HasPairWithSum(nums,target):
 
     return False
 
-#O(n) runtime
+#O(n) runtime and O(n) space complexity
 def HasPairWithSum_unsorted(nums,target):
     """ Return True if a pair of numbers from unsorted list add up to target otherwise return False
         >>> print HasPairWithSum_unsorted([1,2,4,5],8)
         False
+
+        >>> print HasPairWithSum_unsorted([4, 3, 5, 2, 1],6)
+        True
 
         >>> print HasPairWithSum_unsorted([1,2,4,4],8)
         True
@@ -90,7 +93,7 @@ def HasPairWithSum_unsorted(nums,target):
 
     for num in nums:
         val = target - num
-        if val in comp:
+        if num in comp:
             return True
         else:
             comp.add(val) 
