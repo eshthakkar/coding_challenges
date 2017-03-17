@@ -36,6 +36,7 @@ def get_closing_paran_index(sentence, open_paran_index):
     raise Exception("No closing paranthesis") 
 
 
+# O(n) time and O(n) space complexity
 def is_valid(code):
     """ Check if the paranthesis are correctly nested
 
