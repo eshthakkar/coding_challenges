@@ -36,6 +36,51 @@ def get_closing_paran_index(sentence, open_paran_index):
     raise Exception("No closing paranthesis") 
 
 
+def is_valid(code):
+    """ Check if the paranthesis are correctly nested
+
+        >>> code = "{ [ ] ( ) }"
+        >>> print is_valid(code)
+        True
+
+        >>> code = "{ [ ( ] ) }"
+        >>> print is_valid(code)
+        False
+
+        >>> code = "{ [ }"
+        >>> print is_valid(code)
+        False
+
+    """
+
+    st = []
+    paran_vocab = {
+                    "(" : ")",
+                    "{" : "}",
+                    "[" : "]" }
+
+    openers = set(paran_vocab.keys())
+    closers = set(paran_vocab.values())                
+
+    for char in code:
+        if char in openers:
+            st.append(char)
+
+        elif char in closers:
+
+            if not st:
+                return False
+
+            else:
+                last_seen_opener = st.pop()
+                if not paran_vocab[last_seen_opener] == char:
+                    return False
+
+    return len(st) == 0                
+
+
+
+
 if __name__ == "__main__":
     import doctest
 
