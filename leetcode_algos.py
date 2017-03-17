@@ -191,9 +191,6 @@ def find_concatenate_words(A):
     return ans
 
 
-
-
-
 def rotate(arr,k):
     """ Rotate an array by k spaces to the left if k is positive and to the right if k is negative
         >>> arr = [5, 2, 6, 9, 8]
