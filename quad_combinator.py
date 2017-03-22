@@ -101,6 +101,52 @@ def HasPairWithSum_unsorted(nums,target):
     return False              
 
 
+
+# O(n) time complexity and O(1) space complexity
+def max_sum_numbers(nums):
+    """ find the max_sum of a pair of numbers from the array of numbers
+        >>> nums = [5, 7, 2, 4, 8]
+        >>> print max_sum_numbers(nums)
+        15
+
+        >>> nums = [1, 0]
+        >>> print max_sum_numbers(nums)
+        1
+
+        >>> nums = [10, 3]
+        >>> print max_sum_numbers(nums)
+        13
+
+    """
+
+    max_num = nums[0]
+    max_sum = 0
+    max_index_pair = [0, 0]
+
+    if len(nums) < 2:
+        raise Exception("Length of list not sufficient to return max sum from a pair of numbers")
+
+
+    for index, num in enumerate(nums):
+        if index == 0:
+            continue
+
+        current_sum = num + max_num
+        
+        if current_sum > max_sum:
+            max_sum = current_sum
+            max_index_pair[1] = index
+
+
+        if num > max_num:
+            max_num = num
+            max_index_pair[1] = max_index_pair[0]
+            max_index_pair[0] = index
+
+
+    return max_sum        
+
+
 if __name__ == "__main__":
     import doctest
 
