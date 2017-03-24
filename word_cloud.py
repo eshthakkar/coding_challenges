@@ -1,6 +1,12 @@
 class WordCloudData(object):
+    """ Problem: You want to build a word cloud, an infographic where the size of a word corresponds to how often it appears in the body of text.
+        Example: 
+        Input: "We came, we saw, we ate cake."
+        Output: {"we": 3, "came": 1, "saw": 1, "ate": 1, "cake": 1}
+        Complexity: O(n) space and time complexity
 
-# O(n) runtime and space complexity
+    """
+
     def __init__(self, input_string):
         self.words_to_counts = {}
         self.populate_words_to_counts(input_string)
@@ -85,6 +91,7 @@ class WordCloudData(object):
             self.words_to_counts[word] = 1                 
 
 
+# Tests and driver program
 input_data = "We came, we saw, we ate cake."
 wd = WordCloudData(input_data)
 print wd.words_to_counts
@@ -92,7 +99,6 @@ print wd.words_to_counts
 new_data = "We came, we saw, we conquered...then we ate Bill's (Mille-Feuille) cake."
 wd = WordCloudData(new_data)
 print wd.words_to_counts
-
 
 
 if __name__ == "__main__":
