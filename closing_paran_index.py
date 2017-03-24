@@ -1,7 +1,9 @@
-# O(n) time and O(1) space
 def get_closing_paran_index(sentence, open_paran_index):
-    """ Return the closing paranthesis index from the input string
+    """ Problem : Return the closing paranthesis index from the input string
 
+        Complexity Analysis: O(n) time and O(1) space
+
+        Tests:
         >>> sentence = "Sometimes (when I nest them (my parentheticals) too much (like this (and this))) they get confusing."
         >>> print get_closing_paran_index(sentence, 10)
         79
@@ -10,7 +12,6 @@ def get_closing_paran_index(sentence, open_paran_index):
         # >>> sentence = "((tomorrow)"
         # >>> print get_closing_paran_index(sentence, 0) 
            
-
     """
 
     # start with the next character after the opening bracket
@@ -36,10 +37,12 @@ def get_closing_paran_index(sentence, open_paran_index):
     raise Exception("No closing paranthesis") 
 
 
-# O(n) time and O(n) space complexity
 def is_valid(code):
-    """ Check if the paranthesis are correctly nested
+    """ Problem: Check if the paranthesis are correctly nested
 
+        Complexity Analysis: O(n) time and O(n) space complexity
+
+        Tests:
         >>> code = "{ [ ] ( ) }"
         >>> print is_valid(code)
         True
@@ -78,8 +81,6 @@ def is_valid(code):
                     return False
 
     return len(st) == 0                
-
-
 
 
 if __name__ == "__main__":
