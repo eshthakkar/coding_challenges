@@ -1,3 +1,5 @@
+import random
+
 #O(n) time complexity using greedy approach and O(1) space complexity
 def get_max_profit(stock_prices_yesterday):
     """Write an efficient function that takes stock_prices_yesterday 
@@ -592,7 +594,38 @@ def merge_sorted_lists(list1, list2):
 
     return final_merged_list        
 
-            
+
+def get_random(floor, ceiling):
+    """ Returns a random number from the range floor to ceiling + 1"""
+
+    return random.randrange(floor, ceiling + 1)
+
+
+# O(n) time and O(1) space complexity
+def shuffle(given_list):
+    """ Write a function for doing an in-place shuffle of a list.
+    """
+
+    if len(given_list) <= 1:
+        return given_list
+
+    last_index = len(given_list) - 1
+    
+    for index_choosing_for in xrange(0, len(given_list) - 1):
+        random_choice_index = get_random(index_choosing_for, last_index) 
+
+        if random_choice_index != index_choosing_for:
+            given_list[random_choice_index], given_list[index_choosing_for] = given_list[index_choosing_for], given_list[random_choice_index] 
+
+
+# Test cases
+my_list = [2, 4, 8, 1, 0, 3, 4, 5]
+print my_list
+shuffle(my_list)
+print my_list
+shuffle(my_list)
+print my_list
+
 
 if __name__ == "__main__":
     import doctest
