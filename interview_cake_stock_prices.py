@@ -545,7 +545,52 @@ def reverse_words_not_using_inbuilt(message):
 
     return "".join(msg_list)        
    
-            
+
+# O(n) time and space complexity            
+def merge_sorted_lists(list1, list2):
+    """ Function to merge 2 sorted lists
+        >>> l1 = [2, 4, 5]
+        >>> l2 = [1]
+        >>> print merge_sorted_lists(l1, l2)
+        [1, 2, 4, 5]
+
+        >>> l1 = []
+        >>> l2 = [2]
+        >>> print merge_sorted_lists(l1, l2)
+        [2]
+
+        >>> l1 = [1, 3, 5, 6]
+        >>> l2 = [2, 3, 6, 8]
+        >>> print merge_sorted_lists(l1, l2)
+        [1, 2, 3, 3, 5, 6, 6, 8]
+
+    """
+
+    len_merged_list = len(list1) + len(list2)
+
+    final_merged_list = [None] * len_merged_list
+
+    l1_index = 0
+    l2_index = 0
+    merged_index = 0
+
+    while merged_index < len_merged_list:
+
+        is_list1_exhausted = l1_index >= len(list1)
+        is_list2_exhausted = l2_index >= len(list2)
+
+        if not is_list1_exhausted and (is_list2_exhausted or \
+                                      list1[l1_index] < list2[l2_index]):
+            final_merged_list[merged_index] = list1[l1_index]
+            l1_index += 1
+
+        else:
+            final_merged_list[merged_index] = list2[l2_index]
+            l2_index += 1
+
+        merged_index += 1
+
+    return final_merged_list        
 
             
 
