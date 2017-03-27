@@ -161,7 +161,33 @@ def quick_sort_3_way(nums,low,high):
             high -= 1        
 
 
+# O(n) time and O(n) space complexity where n is the number of scores
+def counting_sort(unsorted_scores, TOP_POSSIBLE_SCORE):
+    """ Problem : Sort an unsorted list of n scores in O(n) time, given the top possible score
+        >>> unsorted_scores = [37, 89, 41, 65, 91, 53]
+        >>> print counting_sort(unsorted_scores, 100)
+        [37, 41, 53, 65, 89, 91]
 
+        >>> unsorted_scores = [3, 4, 3, 90, 2, 2, 3, 2, 11]
+        >>> print counting_sort(unsorted_scores, 100)
+        [2, 2, 2, 3, 3, 3, 4, 11, 90]
+
+
+    """
+
+    score_counts = [0] * (TOP_POSSIBLE_SCORE + 1)
+    sorted_scores = []
+
+    for score in unsorted_scores:
+        score_counts[score] += 1
+
+    for score, count in enumerate(score_counts):
+
+        for time in xrange(count):
+            sorted_scores.append(score)
+
+    return sorted_scores        
+            
 
 
     
