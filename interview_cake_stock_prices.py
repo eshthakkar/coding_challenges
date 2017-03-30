@@ -317,7 +317,44 @@ class LinkedList(object):
             while current.next:
                 current = current.next
 
-            current.next = new_node  
+            current.next = new_node 
+
+
+    def recursive_reverse(self, curr, prev=None):
+        """ Problem: Reverse a linked list recursively in place 
+            tests:
+
+            >>> ll = LinkedList()
+            >>> ll.append(2)
+            >>> ll.append(4)
+            >>> ll.append(10)
+            >>> ll.append(5)
+            >>> print_list(ll.head)
+            2 4 10 5
+
+            >>> ll.recursive_reverse(ll.head)
+            >>> print_list(ll.head)
+            5 10 4 2
+
+        """
+
+        if not curr:
+            return
+               
+
+        # if last node, that becomes the new head
+        if not curr.next: 
+            self.head = curr 
+
+            curr.next = prev
+            return 
+
+        # Save our next node for recursive call    
+        next = curr.next
+
+        # Link current to prev
+        curr.next = prev
+        self.recursive_reverse(next, curr)          
 
     
 def print_list(head):
