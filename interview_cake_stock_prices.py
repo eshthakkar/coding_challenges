@@ -655,13 +655,6 @@ def shuffle(given_list):
             given_list[random_choice_index], given_list[index_choosing_for] = given_list[index_choosing_for], given_list[random_choice_index] 
 
 
-# Test cases
-my_list = [2, 4, 8, 1, 0, 3, 4, 5]
-print my_list
-shuffle(my_list)
-print my_list
-shuffle(my_list)
-print my_list
 
 
 if __name__ == "__main__":
@@ -672,5 +665,14 @@ if __name__ == "__main__":
 
     if not result.failed:
         print "All tests passed! GOOD WORK!"
+
+    # Test cases
+    my_list = [2, 4, 8, 1, 0, 3, 4, 5]
+    print my_list
+    shuffle(my_list)
+    print my_list
+    shuffle(my_list)
+    print my_list
+    
     print    
 
