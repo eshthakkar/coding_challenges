@@ -60,7 +60,6 @@ def LCA(n1,n2):
 
     return None  
 
-
 # Driver program
 root = None
 root = insert(root, 20)    
@@ -76,6 +75,53 @@ n2 = root.right
 
 result = LCA(n1,n2)
 print "LCA of %d and %d is %d" %(n1.data, n2.data, result.data)         
+
+
+class Node(object):
+    def __init__(self, key):
+        self.value = key
+        self.left = None
+        self.right = None
+
+def lca_binary_tree(root, n1, n2):
+    """ Find the lowest common ancestor of the two given nodes in a binary tree when parent field is not given in a node of the tree.
+        This method assumes that n1 and n2 are present in the binary tree.
+        Time complexity: O(n)
+
+    """
+
+    if root is None:
+        return None
+
+    if root.value == n1 or root.value == n2:
+        return root
+
+    left_ret = lca_binary_tree(root.left, n1, n2)
+    right_ret = lca_binary_tree(root.right, n1, n2)
+
+    if left_ret and right_ret:
+        return root
+
+    if left_ret:
+        return left_ret
+
+    if right_ret:
+        return right_ret  
+
+
+# Driver program and tests
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+print "LCA(4, 5): ", lca_binary_tree(root, 4, 5).value                      
+print "LCA(4, 6): ", lca_binary_tree(root, 4, 6).value                      
+print "LCA(3, 4): ", lca_binary_tree(root, 3, 4).value                      
+print "LCA(2, 4): ", lca_binary_tree(root, 2, 4).value                      
+
 
 
 
