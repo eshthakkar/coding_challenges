@@ -1,5 +1,8 @@
 def minimum_sum(root):
     """ Return the minimum sum of a path from root to leaf in a binary tree
+        Time complexity : O(n)
+        Space complexity : O(n)
+        
         >>> root = Node(10)
         >>> root.left = Node(-2)
         >>> root.right = Node(7)
