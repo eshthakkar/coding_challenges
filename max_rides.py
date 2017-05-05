@@ -1,3 +1,44 @@
+def calculate_max_rides(board):
+    """ Problem: Calculate the max no. of rides possible from the given mxn matrix starting from the middle of the board. Stop when all surrounding rides have been exhausted.
+        You can move only in vertical and horizontal directions. 
+
+        for e.g:
+            board = 4 1 6 4
+                    2 4 3 7
+                    9 10 1 5
+                    3 3 6 8
+
+            starts at 10 from position (2, 1) and stops at position (0, 1) when the board looks like below:
+            
+            board = 0 0 0 0
+                    0 0 0 0
+                    0 0 1 0
+                    0 0 0 0        
+
+         >>> board = [[4, 1, 6, 4], [2, 4, 3, 7], [9, 10, 1, 5], [3, 3, 6, 8]]
+         >>> print calculate_max_rides(board)
+         75
+
+    """
+
+    # Get the middle start element, add it to the total rides and update board value at that position to 0
+    middle_element, start_row, start_col = get_middle_element(board)
+    total_rides = middle_element
+    update_board(board, start_row, start_col)
+
+    possible_moves_list =  possible_moves(board, start_row, start_col)
+    current_element, current_row, current_col = max_element(possible_moves_list, board)
+
+
+    while current_element:
+        total_rides += current_element
+        update_board(board, current_row, current_col)
+        possible_moves_list =  possible_moves(board, current_row, current_col)
+        current_element, current_row, current_col = max_element(possible_moves_list, board)
+
+    return total_rides
+
+
 def get_middle_element(board):
     """
         >>> board = [[4, 1, 6, 4], [2, 4, 3, 7], [9, 10, 1, 5], [3, 3, 6, 8]]
@@ -68,50 +109,8 @@ def get_middle_indices(total_elements):
     if total_elements % 2 == 0:
         return (mid_index, mid_index-1)
 
-    return mid_index 
-
-
-# Main problem function
-def calculate_max_rides(board):
-    """ Calculate the max no. of rides possible from the given mxn matrix starting from the middle of the board. Stop when all surrounding rides have been exhausted.
-        You can move only in vertical and horizontal directions. 
-
-        for e.g:
-            board = 4 1 6 4
-                    2 4 3 7
-                    9 10 1 5
-                    3 3 6 8
-
-            starts at 10 from position (2, 1) and stops at position (0, 1) when the board looks like below:
-            
-            board = 0 0 0 0
-                    0 0 0 0
-                    0 0 1 0
-                    0 0 0 0        
-
-         >>> board = [[4, 1, 6, 4], [2, 4, 3, 7], [9, 10, 1, 5], [3, 3, 6, 8]]
-         >>> print calculate_max_rides(board)
-         75
-
-    """
-
-    # Get the middle start element, add it to the total rides and update board value at that position to 0
-    middle_element, start_row, start_col = get_middle_element(board)
-    total_rides = middle_element
-    update_board(board, start_row, start_col)
-
-    possible_moves_list =  possible_moves(board, start_row, start_col)
-    current_element, current_row, current_col = max_element(possible_moves_list, board)
-
-
-    while current_element:
-        total_rides += current_element
-        update_board(board, current_row, current_col)
-        possible_moves_list =  possible_moves(board, current_row, current_col)
-        current_element, current_row, current_col = max_element(possible_moves_list, board)
-
-    return total_rides    
-
+    return mid_index     
+ 
 
 def update_board(board, row, col):
     """ Update the board at row, col index to value 0"""

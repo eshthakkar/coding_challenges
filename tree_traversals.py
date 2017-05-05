@@ -534,7 +534,7 @@ def delete_node_bst(root,key):
         >>> nine.add_node(ten)
         >>> nine.add_node(six)
         >>> six.add_node(four)
-        >>> four.add_node(two)
+        >>> four.add_node(two)  
         >>> print preorder(eleven)
         [11, 9, 6, 4, 2, 10, 12]
 

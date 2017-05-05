@@ -200,7 +200,6 @@ def climb_stairs(n,arr=None):
     arr[n] = ways
     return ways
     
-
     
 
 if __name__ == "__main__":
